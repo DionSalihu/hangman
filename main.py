@@ -5,6 +5,8 @@ def main():
     wrong_guess = 5
     print("Welcome to Hangman game!")
     print("Type 'exit' if you want to exit the game!")
+    print("Each unique letter in the word contains 10 points if you guess it right, if you make a wrong guess you get -1 point")
+
     guess_figures = [""" 
       --------    
      |        |   
@@ -63,24 +65,40 @@ def main():
                           
     """
                      ]
-    fin = open('words.txt')
-    file2 = open('spanishwords.txt')
-    file3 = open('shqipwords.txt')
+    EEW = open('EEW.txt')
+    EHW = open('EHW.txt')
+    SEW = open('SEW.txt')
+    SHD = open('SHD.txt')
 
-    words = [line.strip().lower() for line in fin.readlines()]
-    swords = [line.strip().lower() for line in file2.readlines()]
-    shwords = [line.strip().lower() for line in file3.readlines()]
+    English_ewords = [line.strip().lower() for line in EEW.readlines()]
+    English_hwords = [line.strip().lower() for line in EHW.readlines()]
+    Spanish_ewords = [line.strip().lower() for line in SEW.readlines()]
+    Spanish_hwords = [line.strip().lower() for line in SHD.readlines()]
+
 
     while True:
-        s = input("Please choose the language of the game(English , Spanish or Shqip): ").lower()
-        if s == "English".lower():
-            word = random.choice(words)
-        elif s == "Spanish".lower():
-            word = random.choice(swords)
-        elif s== "Shqip".lower():
-            word = random.choice(shwords)
+        language_choose = input("Please choose the language of the game(English or Spanish): ").lower()
+        if language_choose == "Spanish".lower() or language_choose =="English".lower():
+            print(f"Words are going to be on {language_choose} language!")
         else:
-            print("Wrong input , please type the available languages shown below:  ")
+            print("Wrong input , please choose one of the options shown below!")
+            continue
+        difficulty_choose = input("PLease choose the difficulty of the game(easy or hard): ").lower()
+        if language_choose == "Spanish".lower() or language_choose =="English".lower():
+            print(f"Words are going to be on {difficulty_choose} diffculty!")
+        else:
+            print("Wrong input , please choose one of the options shown below!")
+            continue
+        if language_choose == "English".lower() and difficulty_choose == "easy".lower():
+            word = random.choice(English_ewords)
+        elif language_choose == "English".lower() and difficulty_choose == "hard".lower():
+            word = random.choice(English_hwords)
+        elif language_choose == "Spanish".lower() and difficulty_choose == "easy".lower():
+            word = random.choice(Spanish_ewords)
+        elif language_choose == "Spanish".lower() and difficulty_choose == "hard".lower():
+            word = random.choice(Spanish_hwords)
+        else:
+            print('wrong input please type the available options only')
             continue
 
         #diff = input("Please choose the difficulty of the game (Easy , Medium or Hard): ").lower()
