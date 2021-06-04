@@ -5,7 +5,8 @@ def main():
     wrong_guess = 5
     print("Welcome to Hangman game!")
     print("Type 'exit' if you want to exit the game!")
-    print("Each unique letter in the word contains 10 points if you guess it right, if you make a wrong guess you get -1 point")
+    print("Each unique letter in the word contains 10 points if you guess it right, if you make a wrong guess"
+           + " you get -1 point")
 
     guess_figures = [""" 
       --------    
@@ -100,12 +101,6 @@ def main():
         else:
             print('wrong input please type the available options only')
             continue
-
-        #diff = input("Please choose the difficulty of the game (Easy , Medium or Hard): ").lower()
-        #if diff == "easy":
-
-
-
 
         print(word)
         user_score = 0
