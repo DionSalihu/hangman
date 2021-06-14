@@ -70,38 +70,38 @@ def main():
     EHW = open('EHW.txt')
     SEW = open('SEW.txt')
     SHD = open('SHD.txt')
+    #
+    # english_ewords = [line.strip().lower() for line in EEW.readlines()]
+    # english_hwords = [line.strip().lower() for line in EHW.readlines()]
+    # spanish_hwords = [line.strip().lower() for line in SHD.readlines()]
+    # spanish_ewords = [line.strip().lower() for line in SEW.readlines()]
 
-    English_ewords = [line.strip().lower() for line in EEW.readlines()]
-    English_hwords = [line.strip().lower() for line in EHW.readlines()]
-    Spanish_ewords = [line.strip().lower() for line in SEW.readlines()]
-    Spanish_hwords = [line.strip().lower() for line in SHD.readlines()]
-
+    words_dict = {
+        'english-easy': [line.strip().lower() for line in EEW.readlines()],
+        'english-hard': [line.strip().lower() for line in EHW.readlines()],
+        'spanish-easy': [line.strip().lower() for line in SHD.readlines()],
+        'spanish-hard': [line.strip().lower() for line in SEW.readlines()],
+    }
 
     while True:
-        language_choose = input("Please choose the language of the game(English or Spanish): ").lower()
-        if language_choose == "Spanish".lower() or language_choose =="English".lower():
-            print(f"Words are going to be on {language_choose} language!")
-        else:
-            print("Wrong input , please choose one of the options shown below!")
-            continue
-        difficulty_choose = input("PLease choose the difficulty of the game(easy or hard): ").lower()
-        if language_choose == "Spanish".lower() or language_choose =="English".lower():
-            print(f"Words are going to be on {difficulty_choose} diffculty!")
-        else:
-            print("Wrong input , please choose one of the options shown below!")
-            continue
-        if language_choose == "English".lower() and difficulty_choose == "easy".lower():
-            word = random.choice(English_ewords)
-        elif language_choose == "English".lower() and difficulty_choose == "hard".lower():
-            word = random.choice(English_hwords)
-        elif language_choose == "Spanish".lower() and difficulty_choose == "easy".lower():
-            word = random.choice(Spanish_ewords)
-        elif language_choose == "Spanish".lower() and difficulty_choose == "hard".lower():
-            word = random.choice(Spanish_hwords)
-        else:
-            print('wrong input please type the available options only')
-            continue
+        def choose_language():
+            while True:
+                language_choose = input("Please choose the language of the game(English or Spanish): ").lower()
+                if language_choose in ['english', 'spanish']:
+                    return language_choose
+                print("Wrong input , please choose one of the options shown below!")
 
+        def choose_difficulty():
+            while True:
+                difficulty_choose = input("PLease choose the difficulty of the game(easy or hard): ").lower()
+                if difficulty_choose in ['easy', 'hard']:
+                    return difficulty_choose
+                print("Wrong input , please choose one of the options shown below!")
+
+        language_choose = choose_language()
+        difficulty_choose = choose_difficulty()
+
+        word = random.choice(words_dict[f'{language_choose}-{difficulty_choose}'])
         print(word)
         user_score = 0
         length = len(word)
